@@ -4,7 +4,7 @@ enum Status {
     Finished,
 }
 
-pub struct Sequence {
+pub struct Request {
     request_id: u32, // unique identifier
     prompt_token_ids: Vec<u32>, // initial input
     output_token_ids: Vec<u32>, // generated tokens
