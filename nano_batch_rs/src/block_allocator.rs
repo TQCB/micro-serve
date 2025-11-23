@@ -42,7 +42,12 @@ impl BlockAllocator {
     pub fn allocate_multiple(&mut self, count: usize) -> Option<Vec<u32>> {
         let mut allocated = Vec::with_capacity(count);
         for _ in 0..count {
-            allocated.push(self.allocate()?)
+            if let Some(block) = self.allocate() {
+                allocated.push(block);
+            } else { // if we fail an allocation, we rollback and return None to avoid memory leak
+                self.free_multiple(allocated).unwrap();
+                return None;
+            }
         }
 
         Some(allocated)
