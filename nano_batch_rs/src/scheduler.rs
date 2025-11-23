@@ -128,21 +128,6 @@ impl Scheduler {
         let mut num_tokens_per_request: HashMap<String, usize> = HashMap::new();
         let mut current_scheduled_requests: Vec<Request> = Vec::new();
 
-        // for request in self.running.requests {
-        //     if request.should_end() {
-        //         // get blocks from request
-        //         // free those blocks
-        //         // remove request from running queue
-        //         request.status = RequestStatus::Finished;
-        //     } else if request.should_preempt() {
-        //         // check how many tokens we need to generate, and how much space
-        //         // is left in the request's blocks.
-        //         // if there is no more space, we send the request
-        //         // to the wait queue with queue.push_front()
-        //         request.status = RequestStatus::Preempted;
-        //     }
-        // };
-
         let mut i = 0;
         while i < self.running.requests.len() {
             let req = &mut self.running.requests[i];
