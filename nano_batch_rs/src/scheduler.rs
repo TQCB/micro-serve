@@ -166,6 +166,26 @@ impl Scheduler {
         // allocated blocks to and added to running queue.
 
         let n_free_blocks = self.block_allocator.free_blocks.len();
+
+        // we risk deadlocking here if all running requests are preempted and no
+        // blocks are left. First we check if there are no more running requests,
+        // and then we check we have no more more free blocks. If this is true,
+        // then we evict the oldest requests until n_free_blocks > 0
+        if self.running.requests.len() == 0 && n_free_blocks == 0 {
+            let mut victims = Vec::new();
+            while n_free_blocks == 0 {
+                let victim = self.waiting.requests.pop_back()
+                    .expect("Should have been able to pop request of waiting list if there are 1. None running and 2. No more free blocks.");
+                self.block_allocator.free_multiple(victim.logical_blocks.clone())
+                    .expect("Blocks to freed should neither already be freed, or unallocated");
+
+                victims.push(victim);
+            }
+            // once we have free blocks, we add the victims back to waiting
+            // in reverse order so FIFO is conserved
+            self.waiting.requests.extend(victims);
+        }
+
         while let Some(mut request) = self.waiting.requests.pop_front() {
             let blocks_needed = request.needed_blocks();
 
