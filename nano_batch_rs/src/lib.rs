@@ -129,3 +129,10 @@ impl Engine {
         self.inner.update(token_updates);
     }
 }
+
+#[pymodule]
+fn nano_batch(m: &Bound<'_, PyModule>) -> PyResult<()> {
+    m.add_class::<Engine>()?;
+    m.add_class::<PySchedulerOutput>()?;
+    Ok(())
+}
