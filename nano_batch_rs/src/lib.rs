@@ -131,7 +131,7 @@ impl Engine {
 }
 
 #[pymodule]
-fn nano_batch(m: &Bound<'_, PyModule>) -> PyResult<()> {
+fn _nano_batch(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<Engine>()?;
     m.add_class::<PySchedulerOutput>()?;
     Ok(())
