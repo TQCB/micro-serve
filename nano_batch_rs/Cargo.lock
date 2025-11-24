@@ -39,7 +39,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "nano_batch_rs"
+name = "nano-batch-rs"
 version = "0.1.0"
 dependencies = [
  "pyo3",
