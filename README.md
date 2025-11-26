@@ -35,6 +35,14 @@ We achieve a **92% reduction in First Token Latency (TTFT)** and **77% lower Ave
 - **`nano_batch_rs`**: Rust crate containing the `Scheduler`, `BlockAllocator`, and `Request` management.
 - **`nano_batch_models`**: Python package with the `InferenceEngine`, `PagedMistral` model, and benchmarks.
 
+## Acknowledgments
+
+This project was greatly inspired and helped by:
+
+- **[Mistral 7B Paper](https://arxiv.org/pdf/2310.06825)** - For the excellent model architecture and implementation details
+- **[Paged Attention Paper](https://arxiv.org/pdf/2309.06180)** - For the innovative approach to memory-efficient attention
+- **[vLLM Project](https://github.com/vllm-project/vllm)** - For pioneering continuous batching and production serving patterns (with a very well engineered codebase)
+
 ## Usage
 
 ```bash
