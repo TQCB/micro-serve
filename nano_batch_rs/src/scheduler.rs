@@ -171,6 +171,14 @@ impl Scheduler {
             }
         }
 
+        // Schedule all running requests for decode (1 token generation per step)
+        for request in &self.running.requests {
+            scheduled_requests.push(request.request_id.clone());
+            block_tables.insert(request.request_id.clone(), request.logical_blocks.clone());
+            num_tokens_per_request.insert(request.request_id.clone(), 1); // Decode phase: 1 token at a time
+            current_scheduled_requests.push(request.clone());
+        }
+
         // Once we're done handling the running requests,
         // we check how many waiting requests we have.
         // For now we implement FCFS allocation where the FI request gets
