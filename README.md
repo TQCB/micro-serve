@@ -4,7 +4,6 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Rust 1.70+](https://img.shields.io/badge/rust-1.70+-orange.svg)](https://www.rust-lang.org/)
 [![Platform: Linux](https://img.shields.io/badge/platform-linux-lightgrey.svg)](https://www.linux.org/)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 **nano_batch** is a minimalist, high-performance inference engine for Large Language Models, built from scratch. It combines a **Rust-based scheduler** backend with a **PagedAttention kernel** in PyTorch to achieve vastly improved throughput and latency relative to standard implementations such as HuggingFace Transformers `.generate()`.
 
